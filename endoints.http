@@ -1,13 +1,9 @@
 ### Prueba del microservicio usuarios
-
 GET http://127.0.0.1:8001
 
 
 ### Consultar todos los usuarios
-
 GET http://127.0.0.1:8001/usuarios/all
-
-### Registrar usuario
 
 ### Registrar usuario
 POST http://127.0.0.1:8001/usuarios/register
@@ -19,3 +15,15 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### Login
+POST http://127.0.0.1:8001/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "juan@example.com",
+  "password": "123456"
+}
+
+### Ver usuario autenticado
+GET http://127.0.0.1:8001/usuarios/me
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3BvcnRlX3RpY2tldHMiLCJhdWQiOiJ1c3Vhcmlvc19zZXJ2aWNlIiwiaWF0IjoxNzY0MTMzODAwLCJleHAiOjE3NjQxMzc0MDAsInVzZXIiOnsiaWQiOjQsImVtYWlsIjoianVhbkBleGFtcGxlLmNvbSIsInJvbGUiOiJnZXN0b3IifX0.4cIgp-W3wJNV2SQ9oFTukqICOwriuWd5cKuQ4ikU3Uo

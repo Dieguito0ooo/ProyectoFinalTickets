@@ -11,10 +11,21 @@ return function (App $app) {
         return $response;
     });
 
-   $app->group('/usuarios', function (RouteCollectorProxy $group) {
+  $app->group('/usuarios', function (RouteCollectorProxy $group) {
+
+    // Rutas públicas
     $group->get('/all', [UsuariosRepository::class, 'queryAllUsuarios']);
     $group->post('/register', [UsuariosRepository::class, 'register']);
-    });
+    $group->post('/login', [UsuariosRepository::class, 'login']);
+
+    // Ruta protegida
+    $group->get('/me', function ($request, $response) {
+        $user = $request->getAttribute('user');
+        $response->getBody()->write(json_encode($user));
+        return $response->withHeader('Content-Type', 'application/json');
+    })->add(new \App\Middleware\AuthMiddleware());
+
+});
 
 
     

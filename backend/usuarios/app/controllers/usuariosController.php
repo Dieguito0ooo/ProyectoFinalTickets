@@ -36,4 +36,24 @@ class UsuariosController
 
         return $user->toArray();
     }
+
+    public function loginUser($data)
+    {
+        if (!isset($data['email'], $data['password'])) {
+            return ['error' => 'Campos incompletos'];
+        }
+
+        $user = Usuario::where('email', $data['email'])->first();
+
+        if (!$user) {
+            return ['error' => 'Usuario no encontrado'];
+        }
+
+        if (!password_verify($data['password'], $user->password)) {
+            return ['error' => 'Contraseña incorrecta'];
+        }
+
+        return $user;
+    }
+
 }
