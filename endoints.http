@@ -6,3 +6,16 @@ GET http://127.0.0.1:8001
 ### Consultar todos los usuarios
 
 GET http://127.0.0.1:8001/usuarios/all
+
+### Registrar usuario
+
+### Registrar usuario
+POST http://127.0.0.1:8001/usuarios/register
+Content-Type: application/json
+
+{
+  "name": "Juan Perez",
+  "email": "juan@example.com",
+  "password": "123456"
+}
+

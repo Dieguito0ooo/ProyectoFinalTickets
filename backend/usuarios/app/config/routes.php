@@ -11,8 +11,12 @@ return function (App $app) {
         return $response;
     });
 
-    $app->group('/usuarios', function (RouteCollectorProxy $group) {
-        $group->get('/all', [UsuariosRepository::class, 'queryAllUsuarios']);
+   $app->group('/usuarios', function (RouteCollectorProxy $group) {
+    $group->get('/all', [UsuariosRepository::class, 'queryAllUsuarios']);
+    $group->post('/register', [UsuariosRepository::class, 'register']);
     });
+
+
+    
 };
 

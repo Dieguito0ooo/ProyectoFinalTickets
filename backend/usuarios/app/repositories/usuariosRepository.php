@@ -19,4 +19,25 @@ class UsuariosRepository
         $response->getBody()->write($data);
         return $response->withHeader('Content-Type','application/json');
     }
+
+    public function register(Request $request, Response $response)
+    {
+          error_log("METODO RECIBIDO: " . $request->getMethod());
+
+        $controller = new UsuariosController();
+        $data = $request->getParsedBody();
+
+        $result = $controller->registerUser($data);
+
+        if (isset($result['error'])) {
+            $response->getBody()->write(json_encode($result));
+            return $response->withStatus(400)
+                            ->withHeader('Content-Type', 'application/json');
+        }
+
+        $response->getBody()->write(json_encode($result));
+        return $response->withStatus(201)
+                        ->withHeader('Content-Type', 'application/json');
+    }
+
 }
