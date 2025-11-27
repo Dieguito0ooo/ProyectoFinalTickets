@@ -1,21 +1,33 @@
+##========================== USUARIOS ===========================##
+
 ### Prueba del microservicio usuarios
 GET http://127.0.0.1:8001
 
 
 ### Consultar todos los usuarios
 GET http://127.0.0.1:8001/usuarios/all
+Authorization: Bearer token_gestor_4_ab12cd
+
 
 ### Registrar usuario
 POST http://127.0.0.1:8001/usuarios/register
 Content-Type: application/json
 
 {
-  "name": "Juan Perez",
-  "email": "juan@example.com",
-  "password": "123456"
+  "name":"Ana López",
+  "email":"ana2@example.com",
+  "password":"123456"
 }
 
+
+### 
+POST http://127.0.0.1:8001/usuarios/login
+
 ### Login
+GET http://127.0.0.1:8001/usuarios/all
+Authorization: Bearer token_gestor_5_yromgk
+
+###Login por usuario
 POST http://127.0.0.1:8001/usuarios/login
 Content-Type: application/json
 
@@ -24,9 +36,39 @@ Content-Type: application/json
   "password": "123456"
 }
 
+
+
+{
+  "email": "juan@example.com",
+  "password": "password123"
+}
+
+
+
 ### Ver usuario autenticado
 GET http://127.0.0.1:8001/usuarios/me
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3BvcnRlX3RpY2tldHMiLCJhdWQiOiJ1c3Vhcmlvc19zZXJ2aWNlIiwiaWF0IjoxNzY0MTMzODAwLCJleHAiOjE3NjQxMzc0MDAsInVzZXIiOnsiaWQiOjQsImVtYWlsIjoianVhbkBleGFtcGxlLmNvbSIsInJvbGUiOiJnZXN0b3IifX0.4cIgp-W3wJNV2SQ9oFTukqICOwriuWd5cKuQ4ikU3Uo
+Authorization: Bearer token_gestor_5_yromgk
+##========================== TICKETS =============================##
 
 ### Prueba microservicio tiquetes
 GET http://127.0.0.1:8002
+
+### Consultar los tickets
+GET http://127.0.0.1:8002/tickets/all
+Authorization: Bearer token_gestor_5_yromgk
+
+
+### Crear ticket
+POST http://127.0.0.1:8002/tickets/crear
+Authorization: Bearer token_gestor_5_yromgk
+Content-Type: application/json
+
+{
+  "titulo":"Error al pagar",
+  "descripcion":"No deja pagar con tarjeta",
+  "estado":"abierto",
+  "gestor_id":4
+}
+
+
+

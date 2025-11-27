@@ -1,16 +1,15 @@
 <?php
 namespace App\Middleware;
 
-use App\Models\AuthToken;
-use App\Models\Usuario;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use App\Repositories\AuthTokenRepository;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthMiddleware implements MiddlewareInterface
 {
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function process(Request $request, RequestHandlerInterface $handler): Response
     {
         $header = $request->getHeaderLine('Authorization');
 
@@ -22,19 +21,13 @@ class AuthMiddleware implements MiddlewareInterface
 
         $token = substr($header, 7);
 
-        $auth = AuthToken::where('token', $token)->first();
+        $repo = new AuthTokenRepository();
+        $user = $repo->getUserByToken($token);
 
-        if (!$auth) {
+        if (!$user) {
             $response = new \Slim\Psr7\Response();
             $response->getBody()->write(json_encode(['error' => 'Token inválido']));
             return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
-        }
-
-        $user = Usuario::find($auth->user_id);
-        if (!$user) {
-            $response = new \Slim\Psr7\Response();
-            $response->getBody()->write(json_encode(['error' => 'Usuario no encontrado']));
-            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
 
         $request = $request->withAttribute('user', [
