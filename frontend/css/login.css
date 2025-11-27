@@ -99,3 +99,19 @@ button#btnSubmit:active{ transform:translateY(1px) }
 
 /* Footer */
 .small{ text-align:center; color:var(--muted); font-size:12px; margin-top:6px; }
+
+.btn {
+    display: block;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+}

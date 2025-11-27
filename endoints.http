@@ -14,9 +14,9 @@ POST http://127.0.0.1:8001/usuarios/register
 Content-Type: application/json
 
 {
-  "name":"Ana López",
-  "email":"ana2@example.com",
-  "password":"123456"
+  "name":"Juan Diego",
+  "email":"juanpablo@gmail.com",
+  "password":"JuanP123*"
 }
 
 

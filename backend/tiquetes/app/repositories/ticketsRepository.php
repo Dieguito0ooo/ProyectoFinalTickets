@@ -10,23 +10,11 @@ class TicketsRepository
     public function crearTicket(Request $request, Response $response)
     {
         $controller = new TicketsController();
-
         $data = $request->getParsedBody();
-        $user = $request->getAttribute('user'); // viene del token
-
-        $resultado = $controller->crearTicket($data, $user);
-
-        if (isset($resultado['error'])) {
-            $response->getBody()->write(json_encode($resultado));
-            return $response
-                ->withStatus(400)
-                ->withHeader('Content-Type', 'application/json');
-        }
+        $resultado = $controller->crearTicket($data, $request->getAttribute('user'));
 
         $response->getBody()->write(json_encode($resultado));
-        return $response
-            ->withStatus(201)
-            ->withHeader('Content-Type', 'application/json');
+        return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
     }
 
     public function listarTickets(Request $request, Response $response)

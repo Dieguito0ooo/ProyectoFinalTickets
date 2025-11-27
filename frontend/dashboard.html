@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Tickets</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1> Panel de Control</h1>
+    <button id="btnLogout">Cerrar Sesión</button>
+  </header>
+
+  <section class="user-info">
+  <h2>Usuario actual</h2>
+  <div class="user-card">
+    <p><strong>Nombre:</strong> <span id="userName"></span></p>
+    <p><strong>Correo:</strong> <span id="userEmail"></span></p>
+    <p><strong>Rol:</strong> <span id="userRole"></span></p>
+  </div>
+</section>
+
+
+
+  <section class="actions">
+    <button id="btnCrearTicket">Crear Ticket</button>
+    <button id="btnListarTickets">Ver Tickets</button>
+  </section>
+
+  <script src="js/dashboard.js"></script>
+  
+
+</body>
+</html>

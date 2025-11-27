@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f7fb;
+}
+
+.header {
+  background-color: #0077d9;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.ticket-container {
+  display: grid;
+  place-items: center;
+  margin-top: 30px;
+}
+
+#ticketForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+textarea {
+  height: 80px;
+  resize: none;
+  padding: 10px;
+}
+
+input, select, textarea {
+  border: 1px solid #e6e9ef;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  padding: 10px;
+}
+
+button {
+  background-color: #0077d9;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #005fb0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#btnVolver {
+  background: #6b7280;
+}
+
+#btnVolver:hover {
+  background: #4b5563;
+}

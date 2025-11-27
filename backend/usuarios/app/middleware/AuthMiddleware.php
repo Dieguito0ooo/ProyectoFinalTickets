@@ -23,7 +23,6 @@ class AuthMiddleware implements MiddlewareInterface
         $token = substr($header, 7);
 
         $auth = AuthToken::where('token', $token)->first();
-
         if (!$auth) {
             $response = new \Slim\Psr7\Response();
             $response->getBody()->write(json_encode(['error' => 'Token inválido']));

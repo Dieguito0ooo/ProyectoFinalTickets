@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Ticket 🎫</title>
+  <link rel="stylesheet" href="css/crear_ticket.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>🛠 Crear Ticket de Soporte</h1>
+  </header>
+
+  <section class="ticket-container">
+    <form id="ticketForm">
+
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" placeholder="Ej: Error en pago" required>
+
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" placeholder="Describe el problema..." required></textarea>
+
+      <label for="estado">Estado</label>
+      <select id="estado" required>
+        <option value="abierto">Abierto</option>
+        <option value="en_progreso">En progreso</option>
+        <option value="cerrado">Cerrado</option>
+      </select>
+
+      <label for="gestor">Asignar a (Gestor ID)</label>
+      <input type="number" id="gestor" placeholder="ID del gestor" required>
+
+      <button type="submit">Crear Ticket ✅</button>
+
+    </form>
+  </section>
+
+  <footer class="footer">
+    <button id="btnVolver">🔙 Volver al Dashboard</button>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/crear_ticket.js"></script>
+
+</body>
+</html>
