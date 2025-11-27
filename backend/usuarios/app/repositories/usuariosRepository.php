@@ -51,4 +51,23 @@ class UsuariosRepository
         $response->getBody()->write(json_encode($result));
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function logout(Request $request, Response $response)
+    {
+        // Obtener token del header
+        $authHeader = $request->getHeaderLine('Authorization');
+        $token = trim(str_replace('Bearer', '', $authHeader));
+
+        // Borrar token de la BD
+        \Illuminate\Database\Capsule\Manager::table('auth_tokens')
+            ->where('token', $token)
+            ->delete();
+
+        $response->getBody()->write(json_encode([
+            "message" => "Sesión cerrada correctamente"
+        ]));
+
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
 }

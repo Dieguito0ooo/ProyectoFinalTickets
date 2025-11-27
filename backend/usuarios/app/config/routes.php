@@ -25,6 +25,17 @@ return function (App $app) {
         return $response->withHeader('Content-Type', 'application/json');
     })->add(new \App\Middleware\AuthMiddleware());
 
+    // Cerrar sesión (logout)
+    $group->post('/logout', [UsuariosRepository::class, 'logout'])
+      ->add(new \App\Middleware\AuthMiddleware());
+
+    // Listar usuarios solo si es admin
+    $group->get('/admin/list', [UsuariosRepository::class, 'queryAllUsuarios'])
+      ->add(new \App\Middleware\RoleMiddleware('admin'))
+      ->add(new \App\Middleware\AuthMiddleware());
+
+
+
 });
 
 

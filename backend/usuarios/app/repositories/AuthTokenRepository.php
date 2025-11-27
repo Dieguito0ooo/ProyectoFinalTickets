@@ -1,28 +1,36 @@
 <?php
 namespace App\Repositories;
 
-use PDO;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class AuthTokenRepository
 {
-    private $db;
-
-    public function __construct()
-    {
-        require __DIR__ . '/../config/database.php';
-        $this->db = $pdo;
-    }
-
     public function getUserByToken(string $token)
     {
-        $stmt = $this->db->prepare("
-            SELECT users.id, users.name, users.email, users.role
-            FROM auth_tokens
-            INNER JOIN users ON users.id = auth_tokens.user_id
-            WHERE auth_tokens.token = ? LIMIT 1
-        ");
-        $stmt->execute([$token]);
+        // Buscar el último token registrado en la tabla logins
+        $row = DB::table('logins')
+            ->where('token', $token)
+            ->orderBy('timestamp_login', 'desc')
+            ->first();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) {
+            return null;
+        }
+
+        // Buscar el usuario asociado
+        $user = DB::table('users')
+            ->where('id', $row->user_id)
+            ->first();
+
+        if (!$user) {
+            return null;
+        }
+
+        return [
+            'id'    => $user->id,
+            'name'  => $user->name,
+            'email' => $user->email,
+            'role'  => $user->role
+        ];
     }
 }

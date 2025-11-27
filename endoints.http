@@ -20,14 +20,21 @@ Content-Type: application/json
 }
 
 
-### 
-POST http://127.0.0.1:8001/usuarios/login
+
 
 ### Login
 GET http://127.0.0.1:8001/usuarios/all
 Authorization: Bearer token_gestor_5_yromgk
 
-###Login por usuario
+### Logout
+POST http://127.0.0.1:8001/usuarios/logout
+Authorization: Bearer token_gestor_5_yromgk
+
+###
+GET http://127.0.0.1:8001/usuarios/me
+Authorization: Bearer token_gestor_5_yromgk
+
+###
 POST http://127.0.0.1:8001/usuarios/login
 Content-Type: application/json
 
@@ -37,17 +44,30 @@ Content-Type: application/json
 }
 
 
+###Login por usuario
+POST http://127.0.0.1:8001/usuarios/login
+Content-Type: application/json
 
 {
-  "email": "juan@example.com",
-  "password": "password123"
+   "email": "admin1@example.com",
+   "password": "password123"
 }
+
+###
+GET http://127.0.0.1:8001/usuarios/admin/list
+Authorization: Bearer token_gestor_5_yromgk
+
+###
+GET http://127.0.0.1:8001/usuarios/admin/list
+Authorization: Bearer token_admin_1_abcd12
 
 
 
 ### Ver usuario autenticado
 GET http://127.0.0.1:8001/usuarios/me
 Authorization: Bearer token_gestor_5_yromgk
+
+
 ##========================== TICKETS =============================##
 
 ### Prueba microservicio tiquetes
@@ -69,6 +89,9 @@ Content-Type: application/json
   "estado":"abierto",
   "gestor_id":4
 }
+
+
+   
 
 
 
