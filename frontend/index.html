@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Sistema Tickets</title>
-  <link rel="stylesheet" href="css/login.css">
+    <meta charset="UTF-8">
+    <title>Login - Soporte Tickets</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-  <div class="page-container">
-    <div class="login-card">
-      <div class="brand"><h1>Sistema Tickets </h1></div>
 
-      <form id="loginForm" class="form">
-        <label>Correo:</label>
-        <input type="email" id="email" placeholder="juan@example.com">
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
 
-        <label>Contraseña:</label>
-        <input type="password" id="password" placeholder="123456">
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Correo" required class="">
+            <input type="password" id="password" placeholder="Contraseña" required class="">
 
-       <button id="btnLogin">Iniciar sesión</button>
-        <p id="errorMsg" class="error"></p>
-      </form>
+            <button type="submit" id="btnLogin" class="">Ingresar</button>
+
+            <p id="errorMsg" class="error"></p>
+        </form>
     </div>
-  </div>
 
-  <script src="js/api.js"></script>
-  <script src="js/login.js"></script>
-   <script src="js/index.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>

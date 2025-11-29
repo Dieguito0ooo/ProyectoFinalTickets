@@ -10,10 +10,28 @@ class Ticket extends Model
     protected $fillable = [
         'titulo',
         'descripcion',
-        'categoria',
-        'prioridad',
         'estado',
-        'usuario_id',
-        'gestor_id'
+        'gestor_id',
+        'admin_id'
     ];
+
+    public $timestamps = true; 
+
+    // Relación con historial / actividades
+    public function actividades()
+    {
+        return $this->hasMany(TicketActividad::class, 'ticket_id');
+    }
+
+    // Gestor creador del ticket
+    public function gestor()
+    {
+        return $this->belongsTo(User::class, 'gestor_id');
+    }
+
+    // Administrador asignado
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
 }

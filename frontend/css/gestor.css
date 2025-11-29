@@ -1,0 +1,116 @@
+/* ========== PANEL GESTOR ========= */
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background: #f4f0ff;
+    color: #2a2038;
+}
+
+.header {
+    background: #6a0dad; /* Morado fuerte */
+    padding: 15px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout {
+    background: white;
+    color: #6a0dad;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}.logout:hover {
+    background: #e6d6ff;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(106, 13, 173, 0.2);
+}
+
+/* Inputs del form */
+#crearTicketForm input,
+#crearTicketForm textarea {
+    width: 100%;
+    border: 2px solid #6a0dad;
+    padding: 12px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    outline: none;
+    font-size: 15px;
+}
+
+#crearTicketForm input:focus,
+#crearTicketForm textarea:focus {
+    border-color: #8e44ad;
+    box-shadow: 0 0 6px rgba(142, 68, 173, 0.4);
+}
+
+/* Botón animado */
+.btn-76 {
+    position: relative;
+    background: #6a0dad;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+}.btn-76:hover {
+    background: #8e44ad;
+}
+
+.btn-76 span {
+    position: absolute;
+    background: white;
+    transition: 0.3s;
+}
+.top, .bottom {height: 2px; width: 100%; left: 0;}
+.top {top: 0;} .bottom {bottom: 0;}
+.left, .right {width: 2px; height: 100%; top: 0;}
+.left {left: 0;} .right {right: 0;}
+
+.btn-76:hover .top {transform: translateX(-100%);}
+.btn-76:hover .bottom {transform: translateX(100%);}
+.btn-76:hover .left {transform: translateY(100%);}
+.btn-76:hover .right {transform: translateY(-100%);}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 14px;
+    overflow: hidden;
+}
+thead {background: #6a0dad; color: white;}
+thead th {padding: 12px;}
+tbody tr:nth-child(even) {background: #f7ebff;}
+tbody td {padding: 10px; text-align: center;}
+tbody button {
+    background: #6a0dad;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}.btn-76:hover {
+    background: #8e44ad;
+}

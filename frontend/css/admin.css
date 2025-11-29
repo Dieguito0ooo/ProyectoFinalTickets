@@ -1,0 +1,102 @@
+/* ========== PANEL ADMIN ========= */
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background: #f0e6ff;
+    color: #281a40;
+}
+
+.header {
+    background: #4b0082; /* Morado oscuro (índigo) */
+    padding: 15px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout {
+    background: white;
+    color: #4b0082;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}.logout:hover {
+    background: #dcccff;
+}
+
+.acciones-admin {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.btnUsuarios {
+    background: #4b0082;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+}.btnUsuarios:hover {
+    background: #663399;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 10px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(75, 0, 130, 0.25);
+}
+
+/* Filtros */
+.filtros input,
+.filtros select {
+    border: 2px solid #4b0082;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+}.filtros input:focus,
+.filtros select:focus {
+    border-color: #663399;
+    box-shadow: 0 0 4px rgba(102, 51, 153, 0.4);
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+thead {background: #4b0082; color: white;}
+thead th {padding: 12px;}
+tbody tr:nth-child(even) {background: #ede3ff;}
+tbody td {padding: 10px; text-align: center;}
+
+tbody button {
+    background: #4b0082;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}.btnUsuarios:hover,
+tbody button:hover {
+    background: #663399;
+}

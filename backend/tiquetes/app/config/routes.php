@@ -1,29 +1,51 @@
 <?php
-
+use App\Repositories\TicketsRepository;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use App\Middleware\AuthMiddleware;
-use App\Repositories\TicketsRepository;
+use App\Middleware\RoleMiddleware;
 
 return function (App $app) {
-
-    // Ruta de prueba
-    $app->get('/', function ($req, $res) {
-        $res->getBody()->write("Microservicio Tiquetes OK");
-        return $res;
-    });
-
-    // Grupo de rutas /tickets
+// Rutas para la gestión de tickets
     $app->group('/tickets', function (RouteCollectorProxy $group) {
+        $group->get('/search', [TicketsRepository::class, 'buscar'])
+            ->add(new RoleMiddleware(['admin']))    
+            ->add(new AuthMiddleware());
+        // Rutas protegidas por autenticación y autorización
+        $group->post('/create', [TicketsRepository::class, 'crear'])
+            ->add(new RoleMiddleware(['gestor']))
+            ->add(new AuthMiddleware());
+        // Rutas para ver, asignar y cambiar estado de tickets
+        $group->get('/mine', [TicketsRepository::class, 'misTickets'])
+            ->add(new RoleMiddleware(['gestor']))
+            ->add(new AuthMiddleware());
+        // Rutas para administradores
+        $group->get('/all', [TicketsRepository::class, 'todos'])
+            ->add(new RoleMiddleware(['admin']))
+            ->add(new AuthMiddleware());
+        // Rutas para ver detalles, asignar, cambiar estado, agregar comentarios y actividades
+        $group->get('/{id}', [TicketsRepository::class, 'ver'])
+            ->add(new AuthMiddleware());
 
-        // Crear un ticket (protegido)
-        $group->post('/crear', [TicketsRepository::class, 'crearTicket'])
-              ->add(new AuthMiddleware());
+        $group->put('/{id}/assign', [TicketsRepository::class, 'asignar'])
+            ->add(new RoleMiddleware(['admin']))
+            ->add(new AuthMiddleware());
+            
+        $group->put('/{id}/estado', [TicketsRepository::class, 'cambiarEstado'])
+            ->add(new RoleMiddleware(['admin']))
+            ->add(new AuthMiddleware());
+        
+        $group->get('/{id}/actividades', [TicketsRepository::class, 'actividades'])
+            ->add(new RoleMiddleware(['admin']))
+            ->add(new AuthMiddleware());
+        
+        $group->post('/{id}/comentarios', [TicketsRepository::class, 'agregarComentario'])
+            ->add(new AuthMiddleware());
+        
+        $group->post('/{id}/actividad', [TicketsRepository::class, 'agregarActividad'])
+            ->add(new AuthMiddleware()); 
+        
 
-        // Listar todos los tickets (protegido)
-        $group->get('/all', [TicketsRepository::class, 'listarTickets'])
-              ->add(new AuthMiddleware());
 
     });
-
 };

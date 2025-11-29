@@ -1,32 +1,47 @@
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+document.getElementById("loginForm").addEventListener("submit", async function(e) { 
+    e.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMsg = document.getElementById("errorMsg");
+    const btn = document.getElementById("btnLogin");
 
-  try {
-    const res = await fetch("http://localhost:8001/usuarios/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
+    errorMsg.textContent = "";
+    btn.disabled = true;
+    btn.textContent = "Ingresando...";
+    
 
-    const data = await res.json();
+    try {
+        const response = await fetch("http://127.0.0.1:8001/usuarios/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
 
-    if (!res.ok) {
-      alert(data.error || "Login fallido");
-      return;
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.error || "Error desconocido");
+        }
+
+        const data = await response.json();
+
+        // Guardar token y datos del usuario
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("nombre", data.user.name);
+        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("id", data.user.id);
+
+        // Redirigir según rol
+        if (data.user.role === "admin") {
+            window.location.href = "dashboard_admin.html";
+        } else {
+            window.location.href = "dashboard_gestor.html";
+        }
+
+    } catch (error) {
+        errorMsg.textContent = error.message;
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "Ingresar";
     }
-
-    // ✅ Guardar token y usuario correctamente
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-
-    alert("Login exitoso ✅");
-    window.location.href = "dashboard.html";
-
-  } catch (err) {
-    console.error("Error:", err);
-    alert("Error de conexión. Revisa que el backend esté corriendo.");
-  }
 });

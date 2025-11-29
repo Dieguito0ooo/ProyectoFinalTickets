@@ -1,31 +1,44 @@
 <?php
 use Slim\Factory\AppFactory;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../app/config/database.php';
 
+// Crear app
 $app = AppFactory::create();
+
+// Body parser
 $app->addBodyParsingMiddleware();
 
-// ✅ CORS PARA TODAS LAS RUTAS
-$app->options('/{routes:.*}', function ($req, $res) {
-    return $res
-        ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+// ---------- CORS ----------
+$app->options('/{routes:.+}', function ($request, $response) {
+    return $response;
 });
 
-$app->add(function ($req, $handler) {
-    $res = $handler->handle($req);
-    return $res
-        ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+// Middleware CORS
+$app->add(function (Request $request, $handler) {
+
+    $origin = $request->getHeaderLine('Origin') ?: '*';
+
+    $response = $handler->handle($request);
+
+    $response = $response
+        ->withHeader('Access-Control-Allow-Origin', $origin)
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        ->withHeader('Access-Control-Allow-Credentials', 'true');
+
+    if ($request->getMethod() === 'OPTIONS') {
+        return $response->withStatus(200);
+    }
+
+    return $response;
 });
 
-$app->addRoutingMiddleware();
-
+// Rutas
 $routes = require __DIR__ . '/../app/config/routes.php';
 $routes($app);
 
+// Ejecutar app
 $app->run();

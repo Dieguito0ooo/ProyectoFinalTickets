@@ -1,117 +1,104 @@
-:root{
-  --bg:#f4f7fb;
-  --card:#ffffff;
-  --primary:#0077d9;
-  --primary-dark:#005fb0;
-  --muted:#6b7280;
-  --radius:10px;
-  --maxw:420px;
+/* ===== Reset básico ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
-  background: linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
+body {
+    background: #6a0dad; /* morado base */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.page-container{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+/* ===== Tarjeta del login ===== */
+.login-container {
+    background: #fff;
+    width: 100%;
+    max-width: 380px;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    animation: fadeIn 0.5s ease-in-out;
+    border-top: 6px solid #8e44ad; /* morado oscuro decorativo */
 }
 
-.login-card{
-  width:100%;
-  max-width:var(--maxw);
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:28px;
-  box-shadow:0 6px 22px rgba(15,23,42,0.08);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-/* Brand */
-.brand h1{
-  margin:0;
-  font-size:20px;
-  color:var(--primary);
-  text-align:center;
-}
-
-/* Form */
-.form{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:12px;
-}
-
-.form label{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.form input{
-  padding:10px 12px;
-  border-radius:8px;
-  border:1px solid #e6e9ef;
-  font-size:14px;
-  outline:none;
-  transition:box-shadow .12s, border-color .12s;
-}
-
-.form input:focus{
-  box-shadow:0 0 0 3px rgba(0,119,217,0.08);
-  border-color:var(--primary);
-}
-
-button#btnSubmit{
-  margin-top:6px;
-  padding:10px 12px;
-  border-radius:8px;
-  border:none;
-  background:var(--primary);
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-  transition:background .12s, transform .06s;
-}
-
-button#btnSubmit:hover{ background:var(--primary-dark) }
-button#btnSubmit:active{ transform:translateY(1px) }
-
-/* Error */
-.error{
-  color:#b91c1c;
-  font-size:13px;
-  min-height:18px;
-  text-align:center;
-}
-
-/* Footer */
-.small{ text-align:center; color:var(--muted); font-size:12px; margin-top:6px; }
-
-.btn {
-    display: block;
-    background: var(--primary);
-    color: white;
+.login-container h2 {
     text-align: center;
+    margin-bottom: 22px;
+    font-size: 24px;
+    color: #6a0dad;
+    font-weight: 600;
+}
+
+/* ===== Inputs ===== */
+#loginForm input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 2px solid #d7bde2;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+#loginForm input:focus {
+    border-color: #6a0dad;
+    box-shadow: 0 0 8px rgba(106,13,173,0.4);
+}
+
+/* ===== Botón ===== */
+#btnLogin {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: #8e44ad;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#btnLogin:hover {
+    background: #6a0dad;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106,13,173,0.4);
+}
+
+#btnLogin:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== Mensaje de error ===== */
+#errorMsg {
+    text-align: center;
+    color: #fff;
+    background: #c0392b;
     padding: 10px;
     border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
-.btn:hover {
-    background: var(--primary-dark);
+/* ===== Animación de entrada ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -14,21 +14,30 @@ POST http://127.0.0.1:8001/usuarios/register
 Content-Type: application/json
 
 {
-  "name":"Juan Diego",
-  "email":"juanpablo@gmail.com",
-  "password":"JuanP123*"
+  "name":"Maikol",
+  "email":"msvargas@gmail.com",
+  "password":"Maikol123*",
+  "role":"admin"
 }
 
+###login cn credenciales
+POST http://127.0.0.1:8001/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "msvargas@gmail.com",
+  "password": "Maikol123"
+}
 
 
 
 ### Login
 GET http://127.0.0.1:8001/usuarios/all
-Authorization: Bearer token_gestor_5_yromgk
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
 
 ### Logout
 POST http://127.0.0.1:8001/usuarios/logout
-Authorization: Bearer token_gestor_5_yromgk
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
 
 ###
 GET http://127.0.0.1:8001/usuarios/me
@@ -43,6 +52,10 @@ Content-Type: application/json
   "password": "123456"
 }
 
+###CONSULTAR USUARIOS
+GET http://127.0.0.1:8001/usuarios/all
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
+
 
 ###Login por usuario
 POST http://127.0.0.1:8001/usuarios/login
@@ -53,19 +66,13 @@ Content-Type: application/json
    "password": "password123"
 }
 
-###
-GET http://127.0.0.1:8001/usuarios/admin/list
-Authorization: Bearer token_gestor_5_yromgk
 
-###
-GET http://127.0.0.1:8001/usuarios/admin/list
-Authorization: Bearer token_admin_1_abcd12
 
 
 
 ### Ver usuario autenticado
 GET http://127.0.0.1:8001/usuarios/me
-Authorization: Bearer token_gestor_5_yromgk
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
 
 
 ##========================== TICKETS =============================##
@@ -75,20 +82,39 @@ GET http://127.0.0.1:8002
 
 ### Consultar los tickets
 GET http://127.0.0.1:8002/tickets/all
-Authorization: Bearer token_gestor_5_yromgk
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
+
+
 
 
 ### Crear ticket
-POST http://127.0.0.1:8002/tickets/crear
-Authorization: Bearer token_gestor_5_yromgk
+POST http://127.0.0.1:8002/tickets/create
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
 Content-Type: application/json
 
 {
-  "titulo":"Error al pagar",
-  "descripcion":"No deja pagar con tarjeta",
-  "estado":"abierto",
-  "gestor_id":4
+  "titulo": "Fallo servidor",
+  "descripcion": "No responde",
+  "estado": "abierto",
+  "gestor_id": 5,
+  "admin_id": 2
 }
+
+###
+GET http://127.0.0.1:8002/tickets/all
+
+Authorization: Bearer c767e7beacd38b82771c9def7f2a6431
+
+
+
+
+
+
+
+
+###eliminar ticket
+DELETE http://127.0.0.1:8002/tickets/delete/10
+Authorization: Bearer 42325d773ccd958ae5e443a84b79b101
 
 
    
